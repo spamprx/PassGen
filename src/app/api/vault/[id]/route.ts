@@ -6,7 +6,7 @@ import { encrypt, deriveKey, generateSalt } from '@/lib/encryption';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -20,9 +20,10 @@ export async function GET(
     }
 
     await connectDB();
+    const { id } = await params;
 
     const vaultItem = await VaultItem.findOne({
-      _id: params.id,
+      _id: id,
       userId: payload.userId,
     });
 
@@ -42,7 +43,7 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -65,9 +66,10 @@ export async function PUT(
     }
 
     await connectDB();
+    const { id } = await params;
 
     const vaultItem = await VaultItem.findOne({
-      _id: params.id,
+      _id: id,
       userId: payload.userId,
     });
 
@@ -108,7 +110,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -122,9 +124,10 @@ export async function DELETE(
     }
 
     await connectDB();
+    const { id } = await params;
 
     const vaultItem = await VaultItem.findOneAndDelete({
-      _id: params.id,
+      _id: id,
       userId: payload.userId,
     });
 

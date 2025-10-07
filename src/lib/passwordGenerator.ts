@@ -11,7 +11,7 @@ const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
 const NUMBERS = '0123456789';
 const SYMBOLS = '!@#$%^&*()_+-=[]{}|;:,.<>?';
-const SIMILAR_CHARS = '0O1lI';
+// const SIMILAR_CHARS = '0O1lI'; // Reserved for future use
 
 export function generatePassword(options: PasswordOptions): string {
   let charset = '';
