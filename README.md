@@ -1,108 +1,103 @@
-# Password Vault - Secure Password Manager
+# PassGen - Secure Password Manager
 
-A modern, secure password generator and encrypted vault built with Next.js, TypeScript, and MongoDB.
+A modern, full-stack password manager with client-side encryption built with Next.js, TypeScript, and MongoDB.
 
-## Features
+## ✨ Features
 
-- 🔐 **Strong Password Generator** - Customizable length, character types, and strength indicators
-- 🛡️ **Client-Side Encryption** - Your data is encrypted before it reaches the server
+- 🔐 **Strong Password Generator** - Customizable password generation with strength indicators
+- 🛡️ **Client-Side Encryption** - AES-256 encryption before data reaches the server
 - 🔍 **Search & Filter** - Quickly find your saved credentials
-- 📋 **Copy to Clipboard** - Auto-clearing clipboard for security
-- 🎨 **Clean UI** - Modern, responsive design with Tailwind CSS
-- 🔒 **Secure Authentication** - JWT-based auth with bcrypt password hashing
+- 📋 **Smart Clipboard** - Auto-clearing clipboard for enhanced security
+- 🎨 **Modern UI** - Clean, responsive design with Tailwind CSS
+- 🔒 **Secure Authentication** - JWT-based authentication with bcrypt password hashing
+- ⚡ **Real-time Updates** - Instant synchronization across sessions
 
-## Tech Stack
+## 🚀 Tech Stack
 
-- **Frontend**: Next.js 14 with App Router, TypeScript, Tailwind CSS
-- **Backend**: Next.js API Routes
-- **Database**: MongoDB Atlas (Free Tier)
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Database**: MongoDB with Mongoose ODM
+- **Styling**: Tailwind CSS
 - **Authentication**: JWT tokens with bcrypt
-- **Encryption**: CryptoJS (AES encryption with PBKDF2 key derivation)
+- **Encryption**: CryptoJS (AES-256 with PBKDF2 key derivation)
 
-## Setup Instructions
+## 📦 Installation
 
-### 1. Clone and Install Dependencies
+### Prerequisites
 
-```bash
-git clone <your-repo-url>
-cd passgen
-npm install
-```
+- Node.js 18+ installed
+- MongoDB Atlas account (free tier available)
 
-### 2. Set Up MongoDB Atlas
+### Setup
 
-1. Go to [MongoDB Atlas](https://www.mongodb.com/atlas)
-2. Create a free account and cluster
-3. Set up database user and network access
-4. Get your connection string
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/spamprx/PassGen.git
+   cd PassGen
+   ```
 
-### 3. Configure Environment Variables
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Create `.env.local` file:
+3. **Configure environment variables**
+   
+   Create a `.env.local` file in the root directory:
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret_key
+   NEXTAUTH_URL=http://localhost:3000
+   NEXTAUTH_SECRET=your_nextauth_secret_key
+   ```
 
-```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/passgen?retryWrites=true&w=majority
-JWT_SECRET=your-super-secret-jwt-key-here
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your-nextauth-secret-here
-```
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-### 4. Run the Application
+5. **Open your browser**
+   
+   Navigate to `http://localhost:3000`
 
-```bash
-npm run dev
-```
+## 🔒 Security Features
 
-Visit `http://localhost:3000` to see the application.
-
-## Security Features
-
-### Encryption Details
-- **Algorithm**: AES-256 encryption
-- **Key Derivation**: PBKDF2 with 10,000 iterations
-- **Salt**: Random 128-bit salt for each encryption
-- **Client-Side**: All sensitive data is encrypted before transmission
-
-### Authentication
-- Passwords hashed with bcrypt (12 rounds)
-- JWT tokens for session management
-- Secure HTTP-only cookie storage
-
-## API Endpoints
+### Encryption
+- **AES-256** encryption algorithm
+- **PBKDF2** key derivation with 10,000 iterations
+- Unique **salt** for each encryption operation
+- All sensitive data encrypted **client-side** before transmission
 
 ### Authentication
-- `POST /api/auth/register` - Create new account
-- `POST /api/auth/login` - Sign in
+- Password hashing with **bcrypt** (12 rounds)
+- **JWT** tokens for secure session management
+- Token-based API authentication
+- Secure password storage
+
+## 📡 API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
 
 ### Vault Management
-- `GET /api/vault` - Get all vault items
+- `GET /api/vault` - Retrieve all vault items
 - `POST /api/vault` - Create new vault item
 - `PUT /api/vault/[id]` - Update vault item
 - `DELETE /api/vault/[id]` - Delete vault item
 
-## Deployment
+## 🌐 Deployment
 
-### Vercel (Recommended)
+This application is optimized for deployment on **Vercel**:
+
 1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Add environment variables in Vercel dashboard
-4. Deploy!
+2. Import your repository to Vercel
+3. Configure environment variables in Vercel dashboard
+4. Deploy with one click
 
-### Other Platforms
-- **Netlify**: Use `npm run build` and deploy the `out` folder
-- **Railway**: Connect your GitHub repo and add environment variables
-- **Heroku**: Use the Next.js buildpack
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)
 
-## Environment Variables for Production
-
-```env
-MONGODB_URI=your-production-mongodb-uri
-JWT_SECRET=your-production-jwt-secret
-NEXTAUTH_URL=https://your-domain.com
-NEXTAUTH_SECRET=your-production-nextauth-secret
-```
-
-## Development
+## 🛠️ Development
 
 ```bash
 # Install dependencies
@@ -116,24 +111,67 @@ npm run build
 
 # Start production server
 npm start
+
+# Run linting
+npm run lint
 ```
 
-## Security Notes
+## 📁 Project Structure
 
-- Never commit `.env.local` to version control
-- Use strong, unique secrets for production
-- Regularly rotate JWT secrets
-- Consider implementing rate limiting for production
-- Monitor for suspicious activity
+```
+PassGen/
+├── src/
+│   ├── app/              # Next.js app router pages
+│   │   ├── api/         # API routes
+│   │   ├── dashboard/   # Dashboard page
+│   │   └── ...
+│   ├── components/       # React components
+│   ├── lib/             # Utility functions
+│   ├── models/          # MongoDB models
+│   └── types/           # TypeScript type definitions
+├── public/              # Static assets
+└── ...
+```
 
-## Contributing
+## 🔐 Environment Variables
+
+Required environment variables:
+
+| Variable | Description |
+|----------|-------------|
+| `MONGODB_URI` | MongoDB connection string |
+| `JWT_SECRET` | Secret key for JWT token signing |
+| `NEXTAUTH_URL` | Application URL |
+| `NEXTAUTH_SECRET` | Secret key for NextAuth |
+
+> **⚠️ Security Note**: Never commit your `.env.local` file to version control. Use strong, randomly generated secrets for production.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## License
+## 📄 License
 
-MIT License - see LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👤 Author
+
+**spamprx**
+
+- GitHub: [@spamprx](https://github.com/spamprx)
+
+## 🙏 Acknowledgments
+
+- Next.js team for the amazing framework
+- MongoDB team for the database platform
+- All contributors who help improve this project
+
+---
+
+**⭐ If you found this project helpful, please consider giving it a star!**
